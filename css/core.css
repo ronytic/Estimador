@@ -1,0 +1,83 @@
+.cuadro{
+	border:	#D3D3D3 1px solid;
+	border-top:none;
+	padding:15px;
+	
+}
+div.desactivado{
+	background-color:#FEF8E5;
+	padding-bottom:35px;	
+}
+div.activado{
+	background-color:orange!important;
+	border:#D80003 1px solid;
+}
+
+.arriba{
+	margin-top:0px;	
+}
+.separador{
+	margin:3px;	
+	margin-bottom:15px;
+}
+.separadorn{
+	margin:3px;	
+
+}
+.centrar{
+	text-align:center;
+	font-weight:bold	
+}
+.der{
+	text-align:right;	
+}
+.resaltar{
+	font-weight:bold;	
+}
+.reloj{
+	position:fixed;
+	background-color:#000;
+	color:red;
+	font-size:55px;
+	right:10px;
+	top:10px;
+	border-radius:5px;
+	padding:5px;
+	font-weight:bold;
+	z-index:1000;
+}
+.tabla{
+	background-color:#FBFBFB;
+	margin-bottom:0px !important;	
+}
+.tabla th{
+	
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1;
+	color: #555;
+	text-align: center;
+	background-color: #eee;
+
+	border-radius: 4px;	
+}
+fieldset{
+    margin-top:30px;
+    border:#285B36 1px solid !important;
+    padding:20px;
+}
+legend{
+    text-align:center;
+    border:#285B36 1px solid !important;
+    background-color:#357C49;
+    color:#FFF;
+    font-size:18px;
+}
+body{
+
+}
+.tab-pane{
+    border: 1px solid #ddd;
+    border-top:none;
+    padding:5px;
+   }
