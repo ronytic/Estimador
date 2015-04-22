@@ -17,13 +17,13 @@ if($sqlserver){
     mssql_select_db($database) or die("No se Pudo Seleccionar la BD");
 }else{
     //mysql
-    mysql_connect($host,$user,$pass) or die("No se Pudo conectar a la BD");
-    mysql_select_db($database) or die("No se Pudo Seleccionar la BD");
+    $l=mysql_connect($host,$user,$pass) or die("No se Pudo conectar a la BD");
+    mysql_select_db($database,$l) or die("No se Pudo Seleccionar la BD");
 }
 
 function consulta($sql){
     //echo $sql;
-    global $sqlserver;
+    global $sqlserver,$l;
     if($sqlserver){
         $res=mssql_query($sql);
         $resultado =array ();
@@ -34,7 +34,7 @@ function consulta($sql){
         }
        
     }else{
-        $res=mysql_query($sql);    
+        $res=mysql_query($sql,$l);    
         $resultado =array ();
         if ($res)
         {

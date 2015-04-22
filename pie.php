@@ -2,6 +2,7 @@
       <footer class="blancot">
         
         <p>Reportes - Todos los Derechos Reservados &copy; <?php echo date("Y");?> </p>
+        <!--Sistema Realizado por Ronald Franz Nina Layme Cel: +59173230568-->
       </footer>
 
     </div><!-- /.container -->

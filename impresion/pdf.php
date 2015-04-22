@@ -14,10 +14,10 @@ function fecha2Str($d){
 			if($folder==""){
 				$folder="";	
 			}
-			$this->SetTitle(utf8_decode("Sistema de Administración de Clinica"),true);
-			$this->SetAuthor(utf8_decode("Sistema de Administración de Clinica Desarrollado por Ronald Nina Layme. Cel: 73230568 - www.facebook.com/ronaldnina"),true);
-			$this->SetSubject(utf8_decode("Sistema de Administración de Clinica por Ronald Nina Layme. Cel: 73230568 - www.facebook.com/ronaldnina"),true);
-			$this->SetCreator(utf8_decode("Sistema de Administración de Clinica por Ronald Nina Layme. Cel: 73230568 - www.facebook.com/ronaldnina"),true);
+			$this->SetTitle(utf8_decode("Sistema de Administración"),true);
+			$this->SetAuthor(utf8_decode("Sistema de Administración Desarrollado por Ronald Nina Layme. Cel: 73230568 - www.facebook.com/ronaldnina"),true);
+			$this->SetSubject(utf8_decode("Sistema de Administración por Ronald Nina Layme. Cel: 73230568 - www.facebook.com/ronaldnina"),true);
+			$this->SetCreator(utf8_decode("Sistema de Administración por Ronald Nina Layme. Cel: 73230568 - www.facebook.com/ronaldnina"),true);
 			$this->SetProtection(array('print'));
 			if($this->CurOrientation=="P"){$this->ancho=$this->w-34;}else{$this->ancho=$this->w-40;}	
 			/*
@@ -32,7 +32,7 @@ function fecha2Str($d){
 			global $title,$gestion,$titulo,$logo,$idioma;
 			$fecha=capitalizar(strftime("%A, %d ")).$idioma['De'].capitalizar(strftime(" %B ")).$idioma['De'].strftime(" %Y");
 			
-			$this->Image($folder."imagenes/logo/".$logo,20,10,30,20);
+			$this->Image($folder."imagenes/membrete/BronisonRie.jpg",0,0,$this->w,$this->h);
 			$this->Fuente("",10);
 			$this->SetXY(34,12);
 			//$this->Cell(70,4,utf8_decode($title),0,0,"L");
@@ -44,14 +44,14 @@ function fecha2Str($d){
 			//$this->Cell($this->ancho,4,utf8_decode($titulo.$this->orientation),0,5,"C");
 			$this->ln(5);
             $this->CuadroCabecera(105,''." ",20,"");
-			$this->CuadroCabecera(35,'Norma/GNOS/150/04/OPER'." ",20,"");
+			
 			$this->ln(5);
 			if(in_array("Cabecera",get_class_methods($this))){
 				$this->Cabecera();	
 			}
 			$this->ln();
 			
-			$this->Cell($this->ancho,0,"",1,1);
+			//$this->Cell($this->ancho,0,"",1,1);
 			$this->Ln(0.1);
 		}
 		function Pagina(){
@@ -127,47 +127,7 @@ function fecha2Str($d){
 			}
 		}
 		function Footer()
-		{	global $lema,$idioma;
-			//$this->Cell($this->ancho,0,"",1,1);
-			$this->AliasNbPages();
-			// Posición: a 1,5 cm del final
-			$this->SetY(-15);
-			// Arial italic 8
-			
-			// Número de página
-			$this->Fuente("I",7.5);
-            
-			$this->Cell($this->ancho,0,"",1,1);
-            $this->Cell(55,4,utf8_decode("GNOS-150/03/OPER"),"BL",0,"C");
-            $this->Cell(75,4,utf8_decode("SISTEMA DIGITAL DE ALARMAS"),"B",0,"C");
-            $this->Fuente("I",7.5);
-            $this->Cell(55,4,utf8_decode('Página'.": ".$this->PageNo()." ".'de'." {nb}"),"RBT",0,"C");
-            $this->Fuente("I",7.5);
-            $this->ln();
-            $this->Cell(70,4,utf8_decode("Preparado por: Vicepresidencia de seguridad física "),"BL",0,"L");
-            $this->Cell(45,4,utf8_decode("Revisado: Subgerencia General"),"B",0,"L");
-            $this->Cell(40,4,utf8_decode("Aprobado: Gerencia General"),"B",0,"C");
-			$this->Cell(30,4,utf8_decode(date('d-m-Y H:i:s')),"BR",0,"C");
-            
-			/*$this->Fuente("I",8);
-			$this->Cell((round(($this->ancho-50)/2)-10),4,utf8_decode($lema),0,0,"C");
-			$this->Fuente("I",7);
-			
-			
-			if($this->CurOrientation=="P"){
-				$this->Cell((round(($this->ancho-50)/2)+10),3,utf8_decode($idioma['TituloSistema'].""),0,0,"R");
-				$this->ln();
-				$this->Cell((round(($this->ancho-50)/2)+40),3,"",0,0,"R");
-				$this->Cell((round(($this->ancho-50)/2)+10),3,"Desarrollado por Ronald Nina",0,0,"R");
-			}else{
-				$this->Cell((round(($this->ancho-50)/2)+10),4,utf8_decode($idioma['TituloSistema']." - Desarrollado por Ronald Nina"),0,0,"R");	
-			}
-			
-			//$this->Cell(60,4,utf8_decode($idioma['ReporteGenerado']).": ".date('d-m-Y H:i:s'),0,0,"R");
-			
-			if(in_array("Pie",get_class_methods($this))){
-				$this->Pie();	
-			}*/
+		{	
 		}
 		///Tabla
 		var $widths;

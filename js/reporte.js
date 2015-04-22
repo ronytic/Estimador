@@ -25,51 +25,73 @@ $(document).on('submit','form.formulario', function(e) {
 			}
     	})
 });
-
-/*Exportar Excel*/
-	$(document).on('click','#exportarexcel',function(e){
-		e.preventDefault();
-        NombreArchivo=prompt("Nombre del Reporte","Reporte");
-		var tabla=$(this).next().clone();
-		
-        tabla=$(".tablaexportar").clone();
-        /*if(!(tabla.find("thead:eq(0)")).length){
-			tabla=$(this).next().next().clone();
-		}*/
-		//tabla.find("thead:eq(0)").remove();
-		//alert(tabla.find("thead").html().remove());
-		var html='<table border="1">'+tabla.html()+'</table>';
-		//return false;
-		while (html.indexOf('á') != -1) html = html.replace('á', '&aacute;');
-		while (html.indexOf('é') != -1) html = html.replace('é', '&eacute;');
-		while (html.indexOf('í') != -1) html = html.replace('í', '&iacute;');
-		while (html.indexOf('ó') != -1) html = html.replace('ó', '&oacute;');
-		while (html.indexOf('ú') != -1) html = html.replace('ú', '&uacute;');
-		while (html.indexOf('ñ') != -1) html = html.replace('ñ', '&ntilde;');
-		while (html.indexOf('º') != -1) html = html.replace('º', '&ordm;');
-		/*window.open('data:application/vnd.ms-excel;Content-Disposition:attachment;file=export_filename.xls;name=hebe.xls,' +encodeURIComponent(html));
-    e.preventDefault();
-		//$.post(folder+"exportar/excel.php",{'dataexcel':datos},function(data){$("#respuestaexcel").html(data)});		*/
-		//getting values of current time for generating the file name
-        var dt = new Date();
-        var day = dt.getDate();
-        var month = dt.getMonth() + 1;
-        var year = dt.getFullYear();
-        var hour = dt.getHours();
-        var mins = dt.getMinutes();
-        var postfix = day + "." + month + "." + year + "_" + hour + "." + mins;
-        //creating a temporary HTML link element (they support setting file names)
-        var a = document.createElement('a');
-        //getting data from our div that contains the HTML table
-        var data_type = 'data:application/vnd.ms-excel';
-       // var table_div = $(this).next("table");
-        var table_html = html.replace(/ /g, '%20');
-        a.href = data_type + ', ' + table_html;
-        //setting the file name
-        a.download = NombreArchivo+""+'_' + postfix + '.xls';
-        //triggering the function
-        a.click();
-        //just in case, prevent default behaviour
-        e.preventDefault();
-	});
-	/*Fin de Exportar Excel*/
+$(document).on("ready",function(){var linea=0;
+var lineag=0;
+    $(document).on("click",".aumentar",function(e){
+		e.preventDefault();linea++;
+		var posi=$(this).parent().parent();
+		$.post("aumentar.php",{'l':linea},function(data){
+			posi.before(data);
+		});
+	}) 
+    $(".aumentar").click();
+    $(document).on("click",".aumentargasto",function(e){
+		e.preventDefault();lineag++;
+		var posi=$(this).parent().parent();
+		$.post("aumentargasto.php",{'l':lineag},function(data){
+			posi.before(data);
+		});
+	}) 
+    $(".aumentargasto").click();
+    var ottotal=0;
+    var otlibras=0;
+    $(document).on("change",".ocantidad,.opreciounitario,.opesolibras",function(){
+        var lin=$(this).attr("rel");
+        var cantidad=parseFloat($(".ocantidad[rel="+lin+"]").val());
+        var preciounitario=parseFloat($(".opreciounitario[rel="+lin+"]").val());
+        var preciolibras=parseFloat($(".opreciolibras[rel="+lin+"]").val());
+        var total=(cantidad*preciounitario).toFixed(2);
+        
+        $(".ototal[rel="+lin+"]").val(total);
+        
+        otlibras=0.00;
+        $(".opesolibras").each(function(index, element) {
+            var v=parseFloat($(element).val());
+            otlibras+=v*3;
+        });
+        otlibras=otlibras.toFixed(2);
+        $(".superlibras").val(otlibras)
+        
+        
+        ottotal=0.00;
+        $(".ototal").each(function(index, element) {
+            var v=parseFloat($(element).val());
+            ottotal+=v;
+        });
+        ottotal=ottotal.toFixed(2);
+        $(".supertotal").val(ottotal)
+        sumar();
+    });
+    var gttotal=0;
+    $(document).on("keyup",".gtotal",function(){
+        gttotal=0;
+        //alert("asd");
+        $(".gtotal").each(function(index, element) {
+            var v=parseFloat($(element).val());
+            //$(element).val(v)
+            gttotal+=v;
+        });
+        gttotal=gttotal.toFixed(2);
+        $(".SuperTotalG").val(gttotal)
+        sumar();
+    });
+    
+});
+function sumar(){
+    var superlibras=parseFloat($(".superlibras").val());
+    var ottotal=parseFloat($(".supertotal").val());
+    var gttotal=parseFloat($(".SuperTotalG").val());
+    var TodoTotal=superlibras+ottotal+(ottotal*0.32)+gttotal;
+    TodoTotal=TodoTotal.toFixed(2);
+    $(".TodoTotal").val(TodoTotal)
+}
