@@ -25,7 +25,7 @@ include_once("cabecera.php");
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#Recibo" aria-controls="Recibo" role="tab" data-toggle="tab">Recibo</a></li>
-    <li role="presentation"><a href="#Registro" aria-controls="Registro" role="tab" data-toggle="tab">Reporte</a></li>
+    <li role="presentation"><a href="#Registro" aria-controls="Registro" role="tab" data-toggle="tab">Registros</a></li>
 
   </ul>
 
@@ -124,28 +124,22 @@ include_once("cabecera.php");
          </form> 
     </div><!-- Fin de Eventos-->
     <div role="tabpanel" class="tab-pane" id="Registro">
-        <form action="mostrarlogs.php" method="post" class="formulario" >
+        <form action="mostrar.php" method="post" class="formulario" >
             <table class="table tabla">
                 <thead>
                     <tr>
-                        <th>Fecha Desde</th>
-                        <th>Fecha Hasta</th>
-                        <th>Operador</th>
+                        <th>Apellidos</th>
+                        <th>Nombres</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tr>
                     <td>
-                        <input type="date" value="<?php echo date("Y-m-d")?>" class="form-control" name="fechainicio" required>
+                        <input type="text" value="" class="form-control" name="Apellidos" >
                     </td>
                     <td>
-                        <input type="date" value="<?php echo date("Y-m-d")?>" class="form-control" name="fechafin" required>
+                        <input type="text" value="" class="form-control" name="Nombres" >
                     </td>
-                    <td>
-                        <input type="text" value="" class="form-control" name="operador" >
-                    </td>
-                    
-                </tr>
-                <tr>
                     <td><input type="submit" value="Buscar" class="btn btn-success"></td>
                 </tr>
             </table>
